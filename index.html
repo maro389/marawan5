@@ -1,7 +1,22 @@
 
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+<script>
+    window.addEventListener("pageshow", function () {
+        fetch(window.location.href, {
+            cache: "no-store"
+        }).then(function (response) {
+            return response.text();
+        }).then(function (html) {
+            const parser = new DOMParser();
+            const newDoc = parser.parseFromString(html, "text/html");
 
+            if (newDoc.documentElement.innerHTML !== document.documentElement.innerHTML) {
+                location.reload();
+            }
+        }).catch(function () {});
+    });
+</script>
 <head>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta charset="UTF-8">
